@@ -1,0 +1,19 @@
+Model        : LSTM
+Dataset      : ravdess
+Test Accuracy: 84.03%
+Test Loss    : 0.6137
+
+              precision    recall  f1-score   support
+
+       Angry     0.8889    0.8421    0.8649        19
+        Calm     0.8182    0.9474    0.8780        19
+     Disgust     0.8095    0.8947    0.8500        19
+     Fearful     0.8261    1.0000    0.9048        19
+       Happy     0.8667    0.6842    0.7647        19
+     Neutral     0.6000    0.9000    0.7200        10
+         Sad     1.0000    0.4737    0.6429        19
+   Surprised     0.9524    1.0000    0.9756        20
+
+    accuracy                         0.8403       144
+   macro avg     0.8452    0.8428    0.8251       144
+weighted avg     0.8613    0.8403    0.8327       144

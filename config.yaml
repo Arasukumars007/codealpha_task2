@@ -1,0 +1,103 @@
+# ============================================================
+# Emotion Recognition from Speech — Configuration
+# ============================================================
+
+# ----- Dataset -----
+dataset:
+  name: ravdess           # Options: ravdess | tess | emodb | combined
+  raw_dir: data/raw
+  processed_dir: data/processed
+  test_size: 0.10
+  val_size: 0.10
+  random_state: 42
+
+# ----- Audio Preprocessing -----
+audio:
+  sample_rate: 22050
+  duration: 3.0           # seconds (clips padded/truncated to this)
+  hop_length: 512
+  n_fft: 2048
+
+# ----- Feature Extraction -----
+features:
+  n_mfcc: 40
+  n_mels: 128
+  n_chroma: 12
+  use_delta: true         # Append delta & delta-delta MFCCs
+  use_chroma: true
+  use_mel: true
+  use_zcr: true
+  use_rmse: true
+  time_frames: 130        # Fixed time axis after padding
+
+# ----- Augmentation -----
+augmentation:
+  enabled: true
+  noise_factor: 0.005
+  time_stretch_rate: [0.85, 1.15]
+  pitch_shift_steps: [-2, -1, 1, 2]
+  augment_minority: true  # Only augment under-represented classes
+
+# ----- Model -----
+model:
+  architecture: lstm      # Options: cnn | lstm | cnn_lstm | transformer
+  dropout_rate: 0.4
+  lstm_units: [128, 64]
+  cnn_filters: [32, 64, 128]
+  dense_units: 128
+
+# ----- Transformer Hyperparameters -----
+transformer:
+  d_model: 128          # Embedding dimension (must be divisible by num_heads)
+  num_heads: 4          # Number of self-attention heads
+  num_layers: 4         # Number of stacked encoder blocks
+  d_ff: 256             # Feed-forward inner dimension
+  dropout_rate: 0.3     # Dropout for attention & FFN
+
+# ----- Training -----
+training:
+  epochs: 30
+  batch_size: 8
+  learning_rate: 0.001
+  lr_patience: 7
+  lr_factor: 0.5
+  early_stop_patience: 15
+  checkpoint_dir: models
+
+# ----- Evaluation -----
+evaluation:
+  results_dir: results
+  plots_dir: results/plots
+  reports_dir: results/reports
+
+# ----- RAVDESS Emotions -----
+# Filename encodes: Modality-Vocal_Channel-Emotion-Intensity-Statement-Repetition-Actor
+ravdess_emotions:
+  1: neutral
+  2: calm
+  3: happy
+  4: sad
+  5: angry
+  6: fearful
+  7: disgust
+  8: surprised
+
+# ----- TESS Emotions -----
+tess_emotions:
+  neutral: neutral
+  happy: happy
+  sad: sad
+  angry: angry
+  fear: fearful
+  disgust: disgust
+  ps: surprised        # pleasant surprise
+
+# ----- EMO-DB Emotions -----
+emodb_emotions:
+  W: angry
+  L: boredom
+  E: disgust
+  A: fearful
+  F: happy
+  T: sad
+  N: neutral

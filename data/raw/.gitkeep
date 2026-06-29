@@ -1,0 +1,9 @@
+# This directory stores raw audio datasets.
+# Download datasets using:
+#   python scripts/download_data.py --dataset ravdess
+#   python scripts/download_ravdess_zenodo.py
+#
+# Expected structure after download:
+#   data/raw/ravdess/Actor_01/ ... Actor_24/
+#   data/raw/emodb/
+#   data/raw/tess/
